@@ -1,19 +1,23 @@
 import React from "react";
-import "./Home.css";
+import { useSelector } from "react-redux";
 import heroBg from "../../assets/hero-bg.png";
+import { HeroSection, HeroContainer, HeroTitle, HeroSpan, CtaButton } from "./Home.styles";
 
 const Home = () => {
+  const { data: portfolio } = useSelector((state) => state.portfolio);
+  const displayName = portfolio?.name || "Guest";
+
   return (
-    <section id="hero" style={{ backgroundImage: `url(${heroBg})` }}>
-      <div className="hero container">
+    <HeroSection id="hero" bgImage={heroBg}>
+      <HeroContainer className="hero">
         <div>
-          <h1>Hello, <span></span></h1>
-          <h1>This is <span></span></h1>
-          <h1>Sivaram <span></span></h1>
-          <a href="#projects" className="cta">Portfolio</a>
+          <HeroTitle delay="1s">Hello, <HeroSpan delay="0.5s"></HeroSpan></HeroTitle>
+          <HeroTitle delay="2s">This is <HeroSpan delay="1.5s"></HeroSpan></HeroTitle>
+          <HeroTitle delay="3s">{displayName} <HeroSpan delay="2.5s"></HeroSpan></HeroTitle>
+          <CtaButton href="#projects">Portfolio</CtaButton>
         </div>
-      </div>
-    </section>
+      </HeroContainer>
+    </HeroSection>
   );
 };
 
